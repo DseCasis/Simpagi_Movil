@@ -1,93 +1,151 @@
-// ignore: file_names
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:practica_1/src/pages/sing_up.dart';
-// ignore: unused_import
-import 'package:practica_1/src/widgets/icon_container.dart';
-import 'package:practica_1/src/pages/sing_in.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    ));
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(colors: <Color>[
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(210, 253, 209, 255),
-            Color.fromARGB(255, 145, 72, 25),
-          ], begin: Alignment.topLeft)),
-          child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 200),
-            children: <Widget>[
-              IconContainers(url: "images/R.jpg"),
-              Text(
-                "Bienvenidos",
-                style: TextStyle(
-                  fontFamily: "Arial",
-                  fontSize: 30.0,
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Center(
+                    child: Image.asset(
+                      'images/INIAP.png',
+                      height: 150,
+                      width: 150,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              child: Center(
+                child: Text(
+                  "Iniciar Sesión",
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-              Divider(
-                height: 20.0,
-              ),
-              Text(
-                "data",
-                style: TextStyle(fontFamily: "Times New Roman", fontSize: 20.0),
-              ),
-              Divider(
-                height: 20.0,
-              ),
-              SizedBox(
-                width: 300.0,
-                height: 60.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    final route =
-                        MaterialPageRoute(builder: (context) => SingIn());
-                    Navigator.push(context, route);
-                  },
-                  child: Text(
-                    "Sign In",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Arial",
-                        fontSize: 30.0),
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(60),
+                        topRight: Radius.circular(60))),
+                child: Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FadeInUp(
+                          duration: Duration(milliseconds: 1400),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color.fromRGBO(0, 157, 113, .3),
+                                      blurRadius: 20,
+                                      offset: Offset(0, 10))
+                                ]),
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.grey.shade200))),
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        hintText: "Correo electronico",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                        border: InputBorder.none,
+                                        prefixIcon: Icon(Icons.email)),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: Colors.grey.shade200))),
+                                  child: TextField(
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                        hintText: "Contraseña",
+                                        hintStyle:
+                                            TextStyle(color: Colors.grey),
+                                        border: InputBorder.none,
+                                        prefixIcon: Icon(Icons.lock)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      FadeInUp(
+                          duration: Duration(milliseconds: 1600),
+                          child: MaterialButton(
+                            onPressed: () {},
+                            height: 50,
+                            // margin: EdgeInsets.symmetric(horizontal: 50),
+                            color: Color.fromRGBO(92, 205, 167, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            // decoration: BoxDecoration(
+                            // ),
+                            child: Center(
+                              child: Text(
+                                "Ingresar",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )),
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Divider(
-                height: 20.0,
-              ),
-              SizedBox(
-                width: 300.0,
-                height: 60.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    final route =
-                        MaterialPageRoute(builder: (context) => SingUp());
-                    Navigator.push(context, route);
-                  },
-                  child: Text(
-                    "Sign Up",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: "Arial",
-                        fontSize: 30.0),
-                  ),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
