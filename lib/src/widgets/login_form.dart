@@ -12,7 +12,6 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
   late String _email;
   late String _password;
   @override
@@ -59,11 +58,9 @@ class _LoginFormState extends State<LoginForm> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
-                  }
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return MenuLateral();
+                  }));
                 },
                 child: Text(
                   "Ingresar",
