@@ -8,8 +8,8 @@ void main() => runApp(MaterialApp(
     ));
 
 class HomePage extends StatelessWidget {
-  String hardCodedEmail = 'dse.casis@yavirac.edu.ec';
-  String hardCodedPassword = 'Flatron123.';
+  String hardCodedEmail = 'example@email.com.ec';
+  String hardCodedPassword = '12345';
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
