@@ -1,15 +1,16 @@
+import 'package:Simpagi/src/pages/menu_lateral.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:practica_1/src/pages/menu_lateral.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     ));
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  String hardCodedEmail = 'example@email.com.ec';
-  String hardCodedPassword = '12345';
+  String correoEjemplo = 'example@email.com.ec';
+  String contrasenaEjemplo = '12345';
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -32,10 +33,12 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Center(
-                    child: Image.asset(
-                      'images/INIAP.png',
-                      height: 150,
-                      width: 150,
+                    child: FadeInUp(
+                      child: Image.asset(
+                        'images/INIAP.png',
+                        height: 150,
+                        width: 150,
+                      ),
                     ),
                   ),
                 ],
@@ -44,7 +47,8 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            SizedBox(
+            FadeInUp(
+              duration: Duration(milliseconds: 1600),
               child: Center(
                 child: Text(
                   "Iniciar Sesión",
@@ -129,9 +133,9 @@ class HomePage extends StatelessWidget {
                           duration: Duration(milliseconds: 1600),
                           child: MaterialButton(
                             onPressed: () {
-                              if (emailController.text == hardCodedEmail &&
+                              if (emailController.text == correoEjemplo &&
                                   passwordController.text ==
-                                      hardCodedPassword) {
+                                      contrasenaEjemplo) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
