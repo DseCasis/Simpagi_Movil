@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:practica_1/src/pages/menu_lateral.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -7,6 +8,12 @@ void main() => runApp(MaterialApp(
     ));
 
 class HomePage extends StatelessWidget {
+  String hardCodedEmail = 'dse.casis@yavirac.edu.ec';
+  String hardCodedPassword = 'Flatron123.';
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +90,7 @@ class HomePage extends StatelessWidget {
                                           bottom: BorderSide(
                                               color: Colors.grey.shade200))),
                                   child: TextField(
+                                    controller: emailController,
                                     decoration: InputDecoration(
                                         hintText: "Correo electronico",
                                         hintStyle:
@@ -99,6 +107,7 @@ class HomePage extends StatelessWidget {
                                               color: Colors.grey.shade200))),
                                   child: TextField(
                                     obscureText: true,
+                                    controller: passwordController,
                                     decoration: InputDecoration(
                                         hintText: "Contraseña",
                                         hintStyle:
@@ -119,7 +128,35 @@ class HomePage extends StatelessWidget {
                       FadeInUp(
                           duration: Duration(milliseconds: 1600),
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (emailController.text == hardCodedEmail &&
+                                  passwordController.text ==
+                                      hardCodedPassword) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MenuLateral()));
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Error'),
+                                      content: Text(
+                                          'Usuario o contraseña incorrectos'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text('Cerrar'),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
+                            },
                             height: 50,
                             // margin: EdgeInsets.symmetric(horizontal: 50),
                             color: Color.fromRGBO(92, 205, 167, 1),
