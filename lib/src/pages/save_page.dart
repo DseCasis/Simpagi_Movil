@@ -24,7 +24,7 @@ class _FormSave extends StatelessWidget {
         child: Column(children: <Widget>[
           TextFormField(
             decoration: InputDecoration(
-              labelText: "Cedula",
+              labelText: "Cédula",
               border: OutlineInputBorder(),
             ),
           ),
@@ -39,7 +39,15 @@ class _FormSave extends StatelessWidget {
             height: 15,
           ),
           TextFormField(
-            maxLines: 1,
+            maxLines: 3,
+            maxLength: 200,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Tiene que ingresar datos";
+              }
+
+              return null;
+            },
             decoration: InputDecoration(
                 labelText: "Descripción", border: OutlineInputBorder()),
           ),
