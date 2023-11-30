@@ -9,6 +9,8 @@ void main() => runApp(MaterialApp(
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
+  static const String routeName = '/home';
+
   String correoEjemplo = 'example@email.com.ec';
   String contrasenaEjemplo = '12345';
 

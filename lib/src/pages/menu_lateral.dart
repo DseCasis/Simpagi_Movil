@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:Simpagi/src/pages/home_pages.dart';
+import 'package:Simpagi/src/pages/list_page.dart';
 import 'package:flutter/material.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -53,6 +54,10 @@ class MenuLateral extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.person),
               title: Text("Personal"),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ListPage()));
+              },
             ),
             ListTile(
               leading: Icon(Icons.emoji_objects),
