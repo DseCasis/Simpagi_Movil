@@ -128,6 +128,22 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // ...
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          primary: Colors.blue,
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                        child: Text('Guardar usuario'),
+                      ),
                       SizedBox(
                         height: 20,
                       ),
