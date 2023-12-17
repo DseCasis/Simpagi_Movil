@@ -1,4 +1,7 @@
 import 'package:Simpagi/src/pages/home_pages.dart';
+import 'package:Simpagi/src/pages/list_page.dart';
+import 'package:Simpagi/src/pages/menu_lateral.dart';
+import 'package:Simpagi/src/pages/save_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,10 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Practica',
+        title: 'Simpagi',
         initialRoute: "Home",
         routes: <String, WidgetBuilder>{
           "Home": (BuildContext context) => HomePage(),
+          "Menu": (BuildContext context) => MenuLateral(),
+          "Save": (BuildContext context) => SavePage(),
+          "List": (BuildContext context) => ListPage(),
         });
   }
 }
