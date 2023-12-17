@@ -1,6 +1,8 @@
 import 'package:Simpagi/src/pages/menu_lateral.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -14,6 +16,18 @@ class HomePage extends StatelessWidget {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666", "Cancelar", true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -180,6 +194,10 @@ class HomePage extends StatelessWidget {
                           )),
                       SizedBox(
                         height: 50,
+                      ),
+                      ElevatedButton(
+                        onPressed: () => scanQR(),
+                        child: Text('Escanear código QR'),
                       ),
                     ],
                   ),
