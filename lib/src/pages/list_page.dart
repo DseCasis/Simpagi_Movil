@@ -55,7 +55,7 @@ class _NotesState extends State<ListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Notes"),
+          title: const Text("Personal"),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -93,7 +93,7 @@ class _NotesState extends State<ListPage> {
                 decoration: const InputDecoration(
                     border: InputBorder.none,
                     icon: Icon(Icons.search),
-                    hintText: "Search"),
+                    hintText: "Buscar"),
               ),
             ),
             Expanded(

@@ -2,6 +2,7 @@
 
 import 'package:Simpagi/src/pages/home_pages.dart';
 import 'package:Simpagi/src/pages/list_page.dart';
+import 'package:Simpagi/src/widgets/linear_carts.dart';
 import 'package:flutter/material.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -15,7 +16,13 @@ class MenuLateral extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 121, 204, 118),
       ),
       body: Center(
-        child: Center(child: Text('Contenido del proyecto')),
+        child: Column(
+          children: [
+            Expanded(
+              child: LinearCharts(),
+            ),
+          ],
+        ),
       ),
       drawer: Drawer(
         child: ListView(
