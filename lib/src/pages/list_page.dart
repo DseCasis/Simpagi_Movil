@@ -15,8 +15,12 @@ class _NotesState extends State<ListPage> {
   late Future<List<Note>> notes;
   final db = Operation();
 
-  final title = TextEditingController();
-  final content = TextEditingController();
+  final cedula = TextEditingController();
+  final nombre = TextEditingController();
+  final apellido = TextEditingController();
+  final correo = TextEditingController();
+  final departamento = TextEditingController();
+  final cargo = TextEditingController();
   final keyword = TextEditingController();
 
   @override
@@ -109,7 +113,7 @@ class _NotesState extends State<ListPage> {
                         itemCount: items.length,
                         itemBuilder: (context, index) {
                           return ListTile(
-                            title: Text(items[index].title),
+                            title: Text(items[index].cedula),
                             trailing: IconButton(
                               icon: const Icon(Icons.delete),
                               onPressed: () {
@@ -122,8 +126,12 @@ class _NotesState extends State<ListPage> {
                             ),
                             onTap: () {
                               setState(() {
-                                title.text = items[index].title;
-                                content.text = items[index].content;
+                                cedula.text = items[index].cedula;
+                                nombre.text = items[index].nombre;
+                                apellido.text = items[index].apellido;
+                                correo.text = items[index].correo;
+                                departamento.text = items[index].departamento;
+                                cargo.text = items[index].cargo;
                               });
                               showDialog(
                                   context: context,
@@ -137,8 +145,12 @@ class _NotesState extends State<ListPage> {
                                                 //Now update method
                                                 db
                                                     .updateNote(
-                                                        title.text,
-                                                        content.text,
+                                                        cedula.text,
+                                                        nombre.text,
+                                                        apellido.text,
+                                                        correo.text,
+                                                        departamento.text,
+                                                        cargo.text,
                                                         items[index].id)
                                                     .whenComplete(() {
                                                   _refresh();
@@ -161,27 +173,75 @@ class _NotesState extends State<ListPage> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             TextFormField(
-                                              controller: title,
+                                              controller: cedula,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return "Title is required";
+                                                  return "Cedula is required";
                                                 }
                                                 return null;
                                               },
                                               decoration: const InputDecoration(
-                                                label: Text("Title"),
+                                                label: Text("Cedula"),
                                               ),
                                             ),
                                             TextFormField(
-                                              controller: content,
+                                              controller: nombre,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
-                                                  return "Content is required";
+                                                  return "Nombre is required";
                                                 }
                                                 return null;
                                               },
                                               decoration: const InputDecoration(
-                                                label: Text("Content"),
+                                                label: Text("Nombre"),
+                                              ),
+                                            ),
+                                            TextFormField(
+                                              controller: apellido,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return "Apellido is required";
+                                                }
+                                                return null;
+                                              },
+                                              decoration: const InputDecoration(
+                                                label: Text("Apellido"),
+                                              ),
+                                            ),
+                                            TextFormField(
+                                              controller: correo,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return "Correo is required";
+                                                }
+                                                return null;
+                                              },
+                                              decoration: const InputDecoration(
+                                                label: Text("Correo"),
+                                              ),
+                                            ),
+                                            TextFormField(
+                                              controller: departamento,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return "Departamento is required";
+                                                }
+                                                return null;
+                                              },
+                                              decoration: const InputDecoration(
+                                                label: Text("Departamento"),
+                                              ),
+                                            ),
+                                            TextFormField(
+                                              controller: cargo,
+                                              validator: (value) {
+                                                if (value!.isEmpty) {
+                                                  return "Cargo is required";
+                                                }
+                                                return null;
+                                              },
+                                              decoration: const InputDecoration(
+                                                label: Text("Cargo"),
                                               ),
                                             ),
                                           ]),

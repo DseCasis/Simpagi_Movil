@@ -10,8 +10,12 @@ class SavePage extends StatefulWidget {
 }
 
 class _CreateNoteState extends State<SavePage> {
-  final title = TextEditingController();
-  final content = TextEditingController();
+  final cedula = TextEditingController();
+  final nombre = TextEditingController();
+  final apellido = TextEditingController();
+  final correo = TextEditingController();
+  final departamento = TextEditingController();
+  final cargo = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   final db = Operation();
@@ -28,8 +32,12 @@ class _CreateNoteState extends State<SavePage> {
                 if (formKey.currentState!.validate()) {
                   db
                       .createNote(Note(
-                    title: title.text,
-                    content: content.text,
+                    cedula: cedula.text,
+                    nombre: nombre.text,
+                    apellido: apellido.text,
+                    correo: correo.text,
+                    departamento: departamento.text,
+                    cargo: cargo.text,
                   ))
                       .whenComplete(() {
                     //When this value is true
@@ -48,27 +56,75 @@ class _CreateNoteState extends State<SavePage> {
             child: Column(
               children: [
                 TextFormField(
-                  controller: title,
+                  controller: cedula,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Title is required";
+                      return "Cedula is required";
                     }
                     return null;
                   },
                   decoration: const InputDecoration(
-                    label: Text("Title"),
+                    label: Text("Cedula"),
                   ),
                 ),
                 TextFormField(
-                  controller: content,
+                  controller: nombre,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Content is required";
+                      return "Nombre is required";
                     }
                     return null;
                   },
                   decoration: const InputDecoration(
-                    label: Text("Content"),
+                    label: Text("Nombre"),
+                  ),
+                ),
+                TextFormField(
+                  controller: apellido,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Apellido is required";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Apellido"),
+                  ),
+                ),
+                TextFormField(
+                  controller: correo,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Correo is required";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Correo"),
+                  ),
+                ),
+                TextFormField(
+                  controller: departamento,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Departamento is required";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Departamento"),
+                  ),
+                ),
+                TextFormField(
+                  controller: cargo,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Cargo is required";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Cargo"),
                   ),
                 ),
               ],
