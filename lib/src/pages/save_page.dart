@@ -1,97 +1,79 @@
 import 'package:Simpagi/src/db/operation.dart';
 import 'package:Simpagi/src/model/notes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class SavePage extends StatelessWidget {
-  static const String ROUTE = 'Save';
+class SavePage extends StatefulWidget {
+  const SavePage({super.key});
 
+  @override
+  State<SavePage> createState() => _CreateNoteState();
+}
+
+class _CreateNoteState extends State<SavePage> {
+  final title = TextEditingController();
+  final content = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  final db = Operation();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 121, 204, 118),
-        title: Text("Agregar Personal"),
+        title: const Text("Create note"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                //Add Note button
+                //We should not allow empty data to the database
+                if (formKey.currentState!.validate()) {
+                  db
+                      .createNote(Note(
+                    title: title.text,
+                    content: content.text,
+                  ))
+                      .whenComplete(() {
+                    //When this value is true
+                    Navigator.of(context).pop(true);
+                  });
+                }
+              },
+              icon: Icon(Icons.check))
+        ],
       ),
-      body: Container(child: _FormSave()),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class _FormSave extends StatelessWidget {
-  final titleController = TextEditingController();
-  final contentController = TextEditingController();
-  Operation operation = Operation();
-
-  final _formkey = GlobalKey<FormState>();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      child: Form(
-        key: _formkey,
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 15,
-            ),
-            TextFormField(
-              controller: titleController,
-              keyboardType: TextInputType.text,
-              inputFormatters: [
-                FilteringTextInputFormatter.deny(RegExp('[0-9]'))
+      body: Form(
+          //I forgot to specify key
+          key: formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: title,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Title is required";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Title"),
+                  ),
+                ),
+                TextFormField(
+                  controller: content,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Content is required";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    label: Text("Content"),
+                  ),
+                ),
               ],
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Tiene que ingresar datos";
-                }
-
-                return null;
-              },
-              decoration: InputDecoration(
-                  labelText: "Titulo", border: OutlineInputBorder()),
             ),
-            SizedBox(
-              height: 15,
-            ),
-            TextFormField(
-              controller: contentController,
-              maxLines: 3,
-              maxLength: 200,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Tiene que ingresar datos";
-                }
-
-                return null;
-              },
-              decoration: InputDecoration(
-                  labelText: "Contenido", border: OutlineInputBorder()),
-            ),
-            ElevatedButton(
-              child: Text('Guardar'),
-              onPressed: () async {
-                await operation.initializeDatabase();
-
-                if (_formkey.currentState!.validate()) {
-                  await operation.insertNote(
-                    Note(
-                      title: titleController.text,
-                      content: contentController.text,
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Nota guardada con éxito'),
-                    ),
-                  );
-                }
-              },
-            )
-          ],
-        ),
-      ),
+          )),
     );
   }
 }
