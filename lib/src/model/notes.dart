@@ -1,4 +1,6 @@
-class Note {
+import 'package:flutter/material.dart';
+
+class Note extends Table {
   final int? id;
   final String cedula;
   final String nombre;

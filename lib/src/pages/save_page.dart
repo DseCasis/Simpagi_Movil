@@ -57,10 +57,18 @@ class _CreateNoteState extends State<SavePage> {
               children: [
                 TextFormField(
                   controller: cedula,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Cedula is required";
                     }
+                    if (int.tryParse(value) == null) {
+                      return 'La edad debe ser un número entero';
+                    }
+                    if (value.length < 10) {
+                      return 'La cédula debe tener al menos 10 caracteres';
+                    }
+
                     return null;
                   },
                   decoration: const InputDecoration(
@@ -69,6 +77,7 @@ class _CreateNoteState extends State<SavePage> {
                 ),
                 TextFormField(
                   controller: nombre,
+                  keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Nombre is required";
@@ -81,6 +90,7 @@ class _CreateNoteState extends State<SavePage> {
                 ),
                 TextFormField(
                   controller: apellido,
+                  keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Apellido is required";
@@ -93,11 +103,17 @@ class _CreateNoteState extends State<SavePage> {
                 ),
                 TextFormField(
                   controller: correo,
+                  keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return "Correo is required";
+                      return 'El correo electrónico es obligatorio';
                     }
-                    return null;
+
+                    if (!value.contains(
+                      '@',
+                    )) {
+                      return 'El correo electrónico debe contener un símbolo @';
+                    }
                   },
                   decoration: const InputDecoration(
                     label: Text("Correo"),
@@ -105,6 +121,7 @@ class _CreateNoteState extends State<SavePage> {
                 ),
                 TextFormField(
                   controller: departamento,
+                  keyboardType: TextInputType.text,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Departamento is required";
@@ -117,6 +134,7 @@ class _CreateNoteState extends State<SavePage> {
                 ),
                 TextFormField(
                   controller: cargo,
+                  keyboardType: TextInputType.text,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Cargo is required";
